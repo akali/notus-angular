@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-card-hotel',
@@ -91,14 +92,17 @@ export class CardHotelComponent implements OnInit {
   @Input()
   image: string;
 
-  constructor() {
+  constructor(private router: Router) {
     // this.image = "assets/img/team-2-800x800.jpg";
     this.image = "https://t-cf.bstatic.com/xdata/images/hotel/square600/118985615.webp?k=4abc7cd4798d8e7868c3374a2560a198abc72b8026fa9570816d2cd7042757ee&o=&s=1";
   }
 
+  @Input()
+  id: string;
+
   ngOnInit(): void {}
 
   onIconClick() {
-    return
+    this.router.navigateByUrl(`/hotel/${this.id}`)
   }
 }

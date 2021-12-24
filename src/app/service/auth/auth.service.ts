@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {SignInModel, SignUpModel} from "src/app/models/auth";
 import {Error} from "src/app/models/error";
 import {AuthStateEnum} from "./authEnum";
+import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 @Injectable({
   providedIn: `root`
@@ -12,8 +13,9 @@ export class AuthService {
   constructor(private router: Router) { }
 
   getCurrentUsername(): string {
+    console.log(localStorage.getItem("username"));
     const username = localStorage.getItem("username");
-    if (!!!username) {
+    if (!!username) {
       return username;
     }
     return "Zhanel";
@@ -25,6 +27,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
+    console.log(!!localStorage.getItem('authState'));
     return !!localStorage.getItem('authState');
   }
 

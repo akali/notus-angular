@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AppComponent } from "src/app/components/base/AppComponent";
+import {AuthService} from "src/app/service/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: "app-auth-navbar",
@@ -8,7 +10,7 @@ import { AppComponent } from "src/app/components/base/AppComponent";
 export class AuthNavbarComponent extends AppComponent implements OnInit {
   navbarOpen = false;
 
-  constructor() {
+  constructor(protected authService: AuthService, private router: Router) {
     super()
   }
 
@@ -16,5 +18,10 @@ export class AuthNavbarComponent extends AppComponent implements OnInit {
 
   setNavbarOpen() {
     this.navbarOpen = !this.navbarOpen;
+  }
+
+  onLogoutClick() {
+    this.authService.logout();
+    this.router.navigateByUrl("/");
   }
 }

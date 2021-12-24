@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       password: this.signInForm.get('password').value,
     }
     if (!this.authService.authorize(profile)) {
-      this.router.navigateByUrl("/landing");
+      this.router.navigateByUrl("/");
     }
   }
 }

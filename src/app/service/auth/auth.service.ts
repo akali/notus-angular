@@ -11,6 +11,19 @@ export class AuthService {
 
   constructor(private router: Router) { }
 
+  getCurrentUsername(): string {
+    const username = localStorage.getItem("username");
+    if (!!!username) {
+      return username;
+    }
+    return "Zhanel";
+  }
+
+  logout() {
+    localStorage.removeItem('username');
+    localStorage.removeItem('authState');
+  }
+
   isAuthenticated(): boolean {
     return !!localStorage.getItem('authState');
   }
@@ -20,13 +33,25 @@ export class AuthService {
   }
 
   authorize(profile: SignInModel): Error {
-    localStorage.setItem('authState',AuthStateEnum.AUTHORIZED);
+    if (profile.email === "abc@go.com") {
+      return {
+        message: "Email is blocked",
+      };
+    }
+    localStorage.setItem('username', profile.email);
+    localStorage.setItem('authState', AuthStateEnum.AUTHORIZED);
     this.router.navigate(['/']);
     return null;
   }
 
   register(profile: SignUpModel): Error {
-    localStorage.setItem('authState',AuthStateEnum.AUTHORIZED);
+    if (profile.email === "abc@go.com") {
+      return {
+        message: "Email is blocked",
+      };
+    }
+    localStorage.setItem('username', profile.email);
+    localStorage.setItem('authState', AuthStateEnum.AUTHORIZED);
     this.router.navigate(['/']);
     return null;
   }

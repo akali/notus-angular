@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HotelComment} from "../../models/comment";
+import {AuthService} from "src/app/service/auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class HotelCommentService {
         comment: 'comment 1',
         comment_time: new Date(),
         author: 'Zhanel',
-      },{
+      }, {
         id: '2',
         comment: 'comment 2',
         comment_time: new Date(),
@@ -30,27 +31,27 @@ export class HotelCommentService {
     }
   ];
 
-  constructor() { }
+  constructor(private authService: AuthService) {}
 
   addCommentByHotelId(hotelId: string, comment: string): void {
     const hotelObj = this.hotelComments.find(hotel => hotel.hotel_id === hotelId);
     const comments = hotelObj.comments;
     comments.push(
-    {
-      id: `${comments.length}`,
-      comment: `comment-${comments.length}: ${comment}`,
-      comment_time: new Date(),
-      author: 'Zhanel',
-    }
+      {
+        id: `${comments.length}`,
+        comment: `${comment}`,
+        comment_time: new Date(),
+        author: this.authService.getCurrentUsername(),
+      }
     )
 
-    this.hotelComments = [hotelObj,...this.hotelComments.filter(id=> id.hotel_id !== hotelId)]
+    this.hotelComments = [hotelObj, ...this.hotelComments.filter(id => id.hotel_id !== hotelId)]
   }
 
   removeCommentByIdHotelId(hotelId: string, commentId: string): void {
     const hotelObj = this.hotelComments.find(hotel => hotel.hotel_id === hotelId);
     hotelObj.comments = hotelObj.comments.filter(commentObj => commentObj.id !== commentId)
-    this.hotelComments = [hotelObj,...this.hotelComments.filter(id=> id.hotel_id !== hotelId)]
+    this.hotelComments = [hotelObj, ...this.hotelComments.filter(id => id.hotel_id !== hotelId)]
   }
 
   getCommentsByHotelId(hotelId: string): HotelComment {

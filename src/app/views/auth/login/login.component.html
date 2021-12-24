@@ -1,6 +1,8 @@
 <div class="container mx-auto px-4 h-full">
   <div class="flex content-center items-center justify-center h-full">
-    <div class="w-full lg:w-4/12 px-4">
+    <div class="w-full lg:w-4/12 px-4"
+         style="position: relative; width: 600px"
+    >
       <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
       >
@@ -42,7 +44,8 @@
                 type="email"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Email"
-                formControlName="email"/>
+                formControlName="email"
+              />
               <span
                 *ngIf="(registerFormControl.email.touched) && registerFormControl.email.errors?.required">
                 <p class="text-red-700">

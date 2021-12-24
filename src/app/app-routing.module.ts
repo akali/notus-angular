@@ -80,9 +80,9 @@ const routes: Routes = [
   },
   // no layout views
   {path: "profile", component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: "landing", component: LandingComponent},
+  {path: "landing", component: SearchComponent},
   {path: "404", component: NotFoundComponent},
-  {path: "", component: LandingComponent},
+  {path: "", component: SearchComponent},
   {path: "**", redirectTo: "/404", pathMatch: "full"},
 ];
 
